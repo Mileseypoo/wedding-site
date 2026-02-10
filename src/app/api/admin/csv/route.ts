@@ -9,10 +9,15 @@ export async function GET() { // Removed unused 'request' parameter
             orderBy: { createdAt: 'desc' }
         });
 
-        const csvHeader = 'ID,Name,Email,Attending,Guests,Dietary/Notes,Submitted At\n';
-        const csvRows = rsvps.map(r =>
-            `${r.id},"${r.name.replace(/"/g, '""')}","${r.email}","${r.attending ? 'Yes' : 'No'}",${r.guests},"${(r.dietaryQuestions || '').replace(/"/g, '""')}","${r.createdAt.toISOString()}"`
-        ).join('\n');
+        const csvHeader = 'ID,Party ID,Name,Email,Attending,Sunday Party,Guests,Dietary/Notes,Submitted At\n';
+        const csvRows = rsvps.map(r => {
+            // Prisma Client returns correct types, no need to manually parse boolean integers
+            const isAttending = r.attending;
+            const isAttendingSunday = r.attendingSunday || false;
+            const createdDate = new Date(r.createdAt).toISOString();
+
+            return `${r.id},"${r.groupId || ''}","${r.name.replace(/"/g, '""')}","${r.email}","${isAttending ? 'Yes' : 'No'}","${isAttendingSunday ? 'Yes' : 'No'}",${r.guests},"${(r.dietaryQuestions || '').replace(/"/g, '""')}","${createdDate}"`;
+        }).join('\n');
 
         const csv = csvHeader + csvRows;
 

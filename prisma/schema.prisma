@@ -3,17 +3,19 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model RSVP {
   id               Int      @id @default(autoincrement())
+  groupId          String?  // Links members of the same registration group
   name             String
   email            String
   attending        Boolean
   guests           Int      @default(1)
   dietaryQuestions String? // Combined field for flexibility
+  attendingSunday  Boolean? // For Indi's birthday party on Sunday
   createdAt        DateTime @default(now())
 }
 
