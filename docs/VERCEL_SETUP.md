@@ -6,10 +6,39 @@ Follow these steps to deploy your site for free on Vercel with a production-read
 1.  **GitHub Account**: You need to push your code to a GitHub repository.
 2.  **Vercel Account**: Sign up at [vercel.com](https://vercel.com) using your GitHub account.
 
-## Step 1: Push Code to GitHub
-If you haven't already:
-1.  Create a new repository on GitHub (e.g., `wedding-site`).
-2.  Push your local code to it.
+## Step 1: Push Code to GitHub (Safe & Isolated)
+Your project is currently in a local folder on your computer. We need to upload it to its own isolated space on GitHub.
+
+**Why is this safe?**
+Git commands only affect the *specific folder* you are currently in. Running these commands inside your `wedding-site` folder will **not** touch any other projects or repositories on your computer.
+
+1.  **Create a New Repo**: Go to [github.com/new](https://github.com/new).
+    *   Repository name: `wedding-site` (or similar).
+    *   Public/Private: Private is fine.
+    *   **Do not** initialize with README/license (keep it empty).
+    *   Click **Create repository**.
+
+2.  **Link Your Local Code**:
+    Open your terminal/command prompt in the project folder (`c:\dev\SamBecWedddingsite\wedding-site`) and run:
+
+    ```bash
+    # 1. Initialize git if not already done (safe to run again)
+    git init
+
+    # 2. Add your files (we already did this, but good to be sure)
+    git add .
+    git commit -m "Ready for Vercel"
+
+    # 3. Link to your NEW GitHub repo (Replace URL with your actual one!)
+    # This connects THIS folder to THAT remote repository only.
+    git remote add origin https://github.com/YOUR_USERNAME/wedding-site.git
+    
+    # 4. Rename branch to main (standard practice)
+    git branch -M main
+
+    # 5. Push your code!
+    git push -u origin main
+    ```
 
 ## Step 2: Import Project to Vercel
 1.  Go to your **Vercel Dashboard**.
