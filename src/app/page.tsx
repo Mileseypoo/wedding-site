@@ -112,28 +112,42 @@ export default function Home() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/il_1588xN.6367308167_m45h.webp" alt="Divider" style={{ height: 'auto', width: '100%', maxWidth: '500px', margin: '0 auto 20px', display: 'block' }} />
             </div>
-            <h2 className="section-title">The Weekend</h2>
+            <h2 className="section-title">Wedding Timings</h2>
           </div>
 
-          <div className="schedule-grid">
-            {/* Ceremony Card */}
-            <div className="schedule-card">
-              <h3 className="card-title">The Ceremony</h3>
-              <p className="card-date">Saturday, July 4th • 12:00 PM</p>
-              <p className="card-desc">
-                Join us on the Castle Lawns for our wedding ceremony.
-                Please arrive by 11:30 AM for welcome drinks.
-              </p>
+          <div className="schedule-timeline-card max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-sm border border-[#e5e7eb] mb-12 relative">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--background)] px-4">
+              <span className="text-xl font-serif text-[var(--primary)]">Saturday, July 4th</span>
             </div>
 
-            {/* Reception Card */}
-            <div className="schedule-card">
-              <h3 className="card-title">The Reception</h3>
-              <p className="card-date">Saturday, July 4th • 4:00 PM</p>
-              <p className="card-desc">
-                Dinner, dancing, and festivities in The Great Hall and castle grounds.
-                Carriages at midnight.
-              </p>
+            <div className="space-y-8 text-center">
+              <div>
+                <h3 className="text-2xl font-serif text-[var(--primary)] mb-2">12:00 PM • The Ceremony</h3>
+                <p className="text-gray-600 italic mb-2">Please arrive by 11:30 AM sharp for welcome drinks</p>
+                <p className="section-text">
+                  Join us on the Castle Lawns for our wedding ceremony.
+                </p>
+              </div>
+
+              <div className="w-16 h-[1px] bg-[var(--secondary)] mx-auto opacity-50"></div>
+
+              <div>
+                <h3 className="text-xl font-serif text-[var(--foreground)] mb-2">Cocktails & Canapés</h3>
+                <p className="section-text">
+                  To follow in the castle grounds.
+                </p>
+              </div>
+
+              <div className="w-16 h-[1px] bg-[var(--secondary)] mx-auto opacity-50"></div>
+
+              <div>
+                <h3 className="text-2xl font-serif text-[var(--primary)] mb-2">4:00 PM • The Reception</h3>
+                <p className="section-text">
+                  Dinner, dancing, and festivities in The Great Hall.
+                  <br />
+                  Carriages at midnight.
+                </p>
+              </div>
             </div>
           </div>
 
