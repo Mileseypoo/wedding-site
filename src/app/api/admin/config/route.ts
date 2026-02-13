@@ -6,7 +6,23 @@ const prisma = new PrismaClient();
 export async function GET() {
     try {
         const config = await prisma.siteConfig.findFirst();
-        return NextResponse.json(config || {});
+
+        if (!config) {
+            // Seed default config if missing
+            const newConfig = await prisma.siteConfig.create({
+                data: {
+                    siteTitle: 'Becca & Sameep',
+                    primaryColor: '#889C5B',
+                    secondaryColor: '#D4B996',
+                    backgroundColor: '#FDFBF7',
+                    foregroundColor: '#1A2B4C',
+                    fontHeading: 'Cinzel',
+                    fontBody: 'Montserrat',
+                },
+            });
+            return NextResponse.json(newConfig);
+        }
+        return NextResponse.json(config);
     } catch (error) {
         return NextResponse.json({ error: 'Failed to fetch config' }, { status: 500 });
     }
