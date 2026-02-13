@@ -48,7 +48,8 @@ Git commands only affect the *specific folder* you are currently in. Running the
 
 ## Step 3: Add the Database (Postgres)
 1.  In the Vercel project configuration screen (or the Storage tab if you already clicked deploy), go to **Storage**.
-2.  Click **"Connect Store"** -> **"Create New"** -> **"Postgres"**.
+2.  Click **"Connect Store"** -> **"Create New"** -> **"Neon"** (or "Vercel Postgres").
+    *   *Note: Neon is the underlying provider for Vercel's serverless Postgres. It has a generous free tier.*
 3.  Give it a name (e.g., `wedding-db`) and select a region (e.g., `London` / `eu-west-2` since your wedding is in the UK).
 4.  Click **Create**.
 5.  Vercel will automatically add the necessary environment variables (`POSTGRES_URL`, `POSTGRES_PRISMA_URL`, etc.) to your project.

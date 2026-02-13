@@ -46,7 +46,7 @@ export default function Guestbook() {
 
     return (
         <div style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'left' }}>
-            <h3 style={{ textAlign: 'center', marginBottom: '30px', color: 'var(--primary-teal)' }}>Leave a Note</h3>
+            <h3 style={{ textAlign: 'center', marginBottom: '30px', color: 'var(--primary)', fontFamily: 'var(--font-heading)', fontSize: '2rem' }}>Leave a Note</h3>
 
             <form onSubmit={handleSubmit} style={{ marginBottom: '50px', backgroundColor: '#f9f9f9', padding: '20px', borderRadius: '8px' }}>
                 <div style={{ marginBottom: '15px' }}>

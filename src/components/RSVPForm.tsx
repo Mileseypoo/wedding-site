@@ -70,7 +70,7 @@ export default function RSVPForm() {
     if (status === 'success') {
         return (
             <div style={{ textAlign: 'center', padding: '40px', backgroundColor: '#f0fdf4', borderRadius: '8px' }}>
-                <h3 style={{ color: 'var(--primary-teal)', fontSize: '1.5rem', marginBottom: '10px' }}>Thank You!</h3>
+                <h3 style={{ color: 'var(--primary)', fontSize: '1.5rem', marginBottom: '10px', fontFamily: 'var(--font-heading)' }}>Thank You!</h3>
                 <p>Your RSVP response has been recorded.</p>
                 <button
                     onClick={() => {
@@ -101,7 +101,7 @@ export default function RSVPForm() {
                 }}>
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-                        <h4 style={{ margin: 0, color: 'var(--primary-teal-dark)' }}>
+                        <h4 style={{ margin: 0, color: 'var(--foreground)', fontFamily: 'var(--font-heading)' }}>
                             {index === 0 ? 'Your Details' : `Guest ${index + 1}`}
                         </h4>
                         {index > 0 && (
@@ -161,7 +161,7 @@ export default function RSVPForm() {
                                 padding: '15px',
                                 backgroundColor: '#f0fdf4',
                                 borderRadius: '6px',
-                                border: '1px dashed var(--primary-teal)'
+                                border: '1px dashed var(--primary)'
                             }}>
                                 <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', margin: 0 }}>
                                     <input
