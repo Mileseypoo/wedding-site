@@ -95,7 +95,7 @@ export default function Home() {
                 A stunning 17th-century hill-top castle with panoramic views spanning five counties.
                 We have exclusive use of the entire estate for a celebration to remember.
               </p>
-              <a href="https://www.waltoncastle.com/properties/walton-castle" target="_blank" className="btn btn-outline">
+              <a href="https://www.waltoncastle.com/properties/walton-castle" className="btn btn-outline">
                 Explore the Castle
               </a>
             </div>
