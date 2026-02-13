@@ -12,18 +12,43 @@ const montserrat = Montserrat({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Becca & Sameep | Wedding",
-  description: "Join us in celebrating our special day.",
-};
+import { PrismaClient } from "@prisma/client";
 
-export default function RootLayout({
+const prisma = new PrismaClient();
+
+export async function generateMetadata(): Promise<Metadata> {
+  const config = await prisma.siteConfig.findFirst();
+  return {
+    title: config?.siteTitle || "Becca & Sameep | Wedding",
+    description: "Join us in celebrating our special day.",
+  };
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const config = await prisma.siteConfig.findFirst();
+
+  const primary = config?.primaryColor || '#889C5B';
+  const secondary = config?.secondaryColor || '#D4B996';
+  const background = config?.backgroundColor || '#FDFBF7';
+  const foreground = config?.foregroundColor || '#1A2B4C';
+
   return (
     <html lang="en">
+      <head>
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            :root {
+              --primary: ${primary};
+              --secondary: ${secondary};
+              --background: ${background};
+              --foreground: ${foreground};
+            }
+          `}} />
+      </head>
       <body className={`${cinzel.variable} ${montserrat.variable}`}>
         {children}
       </body>

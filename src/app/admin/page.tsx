@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import AdminCMS from "@/components/AdminCMS";
 
 export default function AdminPage() {
     const [password, setPassword] = useState("");
@@ -95,6 +96,12 @@ export default function AdminPage() {
                 <span style={{ fontSize: '0.9rem', color: '#999' }}>
                     (Includes Party ID, Name, Email, Attendance, Sunday Party, Guests, Dietary Notes)
                 </span>
+            </div>
+
+            <div style={{ marginTop: '50px', borderTop: '2px solid #eee', paddingTop: '30px' }}>
+                <h2 style={{ marginTop: 0, color: 'var(--primary-teal-dark)' }}>CMS - Site Editor</h2>
+                <p style={{ color: '#666' }}>Edit website content, colors, and fonts.</p>
+                <AdminCMS />
             </div>
 
             <div style={{ marginTop: '50px', textAlign: 'center' }}>

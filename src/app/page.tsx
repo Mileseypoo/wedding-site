@@ -1,9 +1,65 @@
-"use client";
+import { PrismaClient } from '@prisma/client';
 import Link from "next/link";
 import RSVPForm from "@/components/RSVPForm";
 import Guestbook from "@/components/Guestbook";
 
-export default function Home() {
+const prisma = new PrismaClient();
+
+async function getSections() {
+  try {
+    return await prisma.pageSection.findMany();
+  } catch (e) {
+    console.error('Failed to fetch sections:', e);
+    return [];
+  }
+}
+
+export default async function Home() {
+  const sections = await getSections();
+
+  const getSec = (key: string) => sections.find((s) => s.key === key);
+  const parseMeta = (sec: any) => (sec?.metadata ? JSON.parse(sec.metadata) : {});
+  const parseContent = (sec: any) => {
+    try {
+      return sec?.content ? JSON.parse(sec.content) : null;
+    } catch {
+      return sec?.content; // Return string if not JSON
+    }
+  };
+
+  // Hero
+  const hero = getSec('hero');
+  const heroMeta = parseMeta(hero);
+
+  // Welcome
+  const welcome = getSec('welcome');
+
+  // Venue
+  const venue = getSec('venue');
+  const venueMeta = parseMeta(venue);
+
+  // Timings
+  const timings = getSec('timings');
+  const timingsData = parseContent(timings); // Object with ceremony, reception etc.
+
+  // Picnic
+  const picnic = getSec('picnic');
+  const picnicMeta = parseMeta(picnic);
+
+  // FAQ
+  const faq = getSec('faq');
+  const faqList = Array.isArray(parseContent(faq)) ? parseContent(faq) : [];
+
+  // RSVP
+  const rsvp = getSec('rsvp');
+
+  // Memories
+  const memories = getSec('memories');
+  const memoriesMeta = parseMeta(memories);
+
+  // Guestbook
+  const guestbook = getSec('guestbook');
+
   return (
     <div className="main-wrapper">
       {/* Navigation */}
@@ -26,8 +82,8 @@ export default function Home() {
         <div className="hero-bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/samandbecny.jpg"
-            alt="Sam and Bec"
+            src={heroMeta.mainImageUrl || "/samandbecny.jpg"}
+            alt="Hero Background"
             className="hero-img"
           />
           <div className="hero-overlay"></div>
@@ -35,20 +91,19 @@ export default function Home() {
 
         <div className="hero-content">
           <h1 className="hero-title">
-            Becca & Sameep
+            {hero?.title || "Becca & Sameep"}
           </h1>
-          <p className="hero-subtitle-main">are getting married!</p>
+          <p className="hero-subtitle-main">{hero?.subtitle || "are getting married!"}</p>
           <div className="hero-date">
-            <span>July 4th 2026</span>
+            <span>{heroMeta.date || "July 4th 2026"}</span>
             <span className="dot-separator"></span>
-            <span>Walton Castle, Clevedon</span>
+            <span>{heroMeta.location || "Walton Castle, Clevedon"}</span>
           </div>
         </div>
       </header>
 
-      {/* Our Story */}
+      {/* Our Story / Welcome */}
       <section id="story" className="section story-section">
-        {/* Background Flower Watermark */}
         <div className="story-bg-floral">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/il_1588xN.6319250896_pu5c.webp" alt="" />
@@ -60,13 +115,13 @@ export default function Home() {
             <img src="/il_1588xN.6367308285_hs72.webp" alt="Floral Element" />
           </div>
 
-          <h2 className="section-title">Welcome to our wedding website!</h2>
+          <h2 className="section-title">{welcome?.title || "Welcome to our wedding website!"}</h2>
           <p className="section-text">
-            We can't wait to celebrate our special day with you. We've created this website as a convenient and interactive way to share all the important details with you in the lead up to our wedding.
+            {welcome?.content || "We can't wait to celebrate our special day with you."}
           </p>
           <div className="text-center mt-12">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/niagra.png" alt="Becca and Sameep at Niagara" style={{ maxWidth: '100%', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
+            <img src={welcome?.imageUrl || "/niagra.png"} alt="Welcome" style={{ maxWidth: '100%', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
           </div>
         </div>
       </section>
@@ -76,27 +131,25 @@ export default function Home() {
         <div className="container">
           <div className="text-center mb-12">
             <div className="floral-divider">
-              {/* Large Floral for Venue */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/il_1588xN.6319250904_7c06.webp" alt="Floral Element" style={{ height: '20vh', maxHeight: '200px', width: 'auto', margin: '0 auto 20px', display: 'block' }} />
             </div>
-            <h2 className="section-title">The Venue</h2>
+            <h2 className="section-title">{venue?.title || "The Venue"}</h2>
           </div>
 
           <div className="venue-container">
             <div className="venue-image">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/walton_castle.jpg" alt="Walton Castle" />
+              <img src={venue?.imageUrl || "/walton_castle.jpg"} alt={venue?.subtitle || "Walton Castle"} />
             </div>
             <div className="venue-details text-center md:text-left">
-              <h3 className="venue-name">Walton Castle</h3>
-              <p className="venue-location">Clevedon, North Somerset</p>
+              <h3 className="venue-name">{venue?.subtitle || "Walton Castle"}</h3>
+              <p className="venue-location">{venueMeta.address || "Clevedon, North Somerset"}</p>
               <p className="section-text">
-                A stunning 17th-century hill-top castle with panoramic views spanning five counties.
-                We have exclusive use of the entire estate for a celebration to remember.
+                {venue?.content || "A stunning castle..."}
               </p>
-              <a href="https://www.waltoncastle.com/properties/walton-castle" className="btn btn-outline">
-                Explore the Castle
+              <a href={venueMeta.buttonLink || "#"} className="btn btn-outline">
+                {venueMeta.buttonText || "Explore the Castle"}
               </a>
             </div>
           </div>
@@ -108,39 +161,38 @@ export default function Home() {
         <div className="container">
           <div className="text-center mb-12">
             <div className="floral-divider">
-              {/* large floral for Weekend */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/il_1588xN.6367308167_m45h.webp" alt="Divider" style={{ height: 'auto', width: '100%', maxWidth: '500px', margin: '0 auto 20px', display: 'block' }} />
             </div>
-            <h2 className="section-title">Wedding Timings</h2>
+            <h2 className="section-title">{timings?.title || "Wedding Timings"}</h2>
           </div>
 
           {/* Wedding Timings Card */}
           <div className="picnic-card mb-12">
-            <h3 className="card-title text-primary">Saturday, July 4th</h3>
+            <h3 className="card-title text-primary">{timingsData?.mainCard?.title || "Saturday, July 4th"}</h3>
             <div className="space-y-6 mt-6">
               <div>
-                <p className="card-desc mb-2 italic">Please arrive by 11:30 AM sharp</p>
-                <p className="card-date text-[var(--foreground)] mb-2" style={{ fontSize: '1.125rem', fontWeight: 'normal' }}>12:00 PM • The Ceremony</p>
-                <p className="card-desc">followed by cocktails and canapés</p>
+                <p className="card-desc mb-2 italic">{timingsData?.mainCard?.ceremony?.desc?.split('\n')[0] || "Please arrive by 11:30 AM sharp"}</p>
+                <p className="card-date text-[var(--foreground)] mb-2" style={{ fontSize: '1.125rem', fontWeight: 'normal' }}>{timingsData?.mainCard?.ceremony?.time || "12:00 PM"} • {timingsData?.mainCard?.ceremony?.title || "The Ceremony"}</p>
+                <p className="card-desc">{timingsData?.mainCard?.cocktails?.desc || "followed by cocktails and canapés"}</p>
               </div>
 
               <div className="w-12 h-[1px] bg-[var(--secondary)] mx-auto opacity-30"></div>
 
               <div>
-                <p className="card-date text-[var(--foreground)] mb-2" style={{ fontSize: '1.125rem', fontWeight: 'normal' }}>3:00 PM • The Reception</p>
-                <p className="card-desc">Wedding Breakfast, speeches, dancing</p>
+                <p className="card-date text-[var(--foreground)] mb-2" style={{ fontSize: '1.125rem', fontWeight: 'normal' }}>{timingsData?.mainCard?.reception?.time || "3:00 PM"} • {timingsData?.mainCard?.reception?.title || "The Reception"}</p>
+                <p className="card-desc">{timingsData?.mainCard?.reception?.desc || "Wedding Breakfast, speeches, dancing"}</p>
               </div>
             </div>
           </div>
 
           {/* Sunday Picnic */}
           <div className="picnic-card">
-            <h3 className="card-title text-primary">Sunday Birthday Picnic</h3>
-            <p className="card-date">Sunday, July 5th • From 12:00 PM</p>
-            <p className="picnic-location">Walton Castle Grounds</p>
+            <h3 className="card-title text-primary">{picnic?.title || "Sunday Birthday Picnic"}</h3>
+            <p className="card-date text-[var(--foreground)] mb-2" style={{ fontSize: '1.25rem' }}>{picnic?.subtitle || "Sunday, July 5th • From 12:00 PM"}</p>
+            <p className="picnic-location">{picnicMeta.location || "Walton Castle Grounds"}</p>
             <p className="card-desc">
-              We'd love to invite you to join us the next day for Indi's first birthday.
+              {picnic?.content || "We'd love to invite you to join us..."}
             </p>
           </div>
         </div>
@@ -152,34 +204,13 @@ export default function Home() {
           <div className="text-center mb-12">
             <div className="floral-divider">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/il_1588xN.6319250896_pu5c.webp" alt="Floral Element" style={{ height: '90px', opacity: 0.9 }} />
+              <img src="/il_1588xN.6319250896_pu5c.webp" alt="Floral Element" style={{ height: 'auto', width: '100%', maxWidth: '500px', margin: '0 auto 20px', display: 'block', opacity: 0.9 }} />
             </div>
-            <h2 className="section-title">Q & A</h2>
+            <h2 className="section-title">{faq?.title || "Q & A"}</h2>
           </div>
 
           <div className="faq-grid">
-            {[
-              {
-                q: "What is the dress code?",
-                a: "Semi-Formal / Cocktail Attire. We want you to feel fabulous but comfortable enough to dance!"
-              },
-              {
-                q: "Are children invited?",
-                a: "We love your little ones, but we have decided to keep our wedding and reception an adults-only event."
-              },
-              {
-                q: "Is there parking?",
-                a: "Yes, there is ample free parking available at the castle."
-              },
-              {
-                q: "What about accommodation?",
-                a: "We recommend the Best Western Walton Park Hotel nearby. There are also many lovely Airbnbs in Clevedon."
-              },
-              {
-                q: "Taxis?",
-                a: "Please pre-book taxis for midnight! Local numbers: Triangle Cars (01275 880014), Aark Taxi (07944 563740)."
-              }
-            ].map((item, i) => (
+            {faqList.map((item: any, i: number) => (
               <div key={i} className="faq-item">
                 <h4 className="faq-question">{item.q}</h4>
                 <p className="faq-answer">{item.a}</p>
@@ -196,8 +227,8 @@ export default function Home() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/il_1588xN.6367308167_m45h.webp" alt="Divider" style={{ height: '60px', opacity: 0.8, display: 'block', margin: '0 auto' }} />
           </div>
-          <h2 className="section-title">Will You Be Joining Us?</h2>
-          <p className="rsvp-subtitle">Kindly Respond By September 1st, 2026</p>
+          <h2 className="section-title">{rsvp?.title || "Will You Be Joining Us?"}</h2>
+          <p className="rsvp-subtitle">{rsvp?.subtitle || "Kindly Respond By September 1st, 2026"}</p>
           <RSVPForm />
         </div>
       </section>
@@ -209,16 +240,16 @@ export default function Home() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/il_1588xN.6367308285_hs72.webp" alt="Floral Element" />
           </div>
-          <h2 className="section-title">Share Your Memories</h2>
+          <h2 className="section-title">{memories?.title || "Share Your Memories"}</h2>
           <p className="section-text">
-            Help us capture the story of our lives together. If you have photos of us, please upload them!
+            {memories?.content || "Help us capture the story..."}
           </p>
           <a
-            href="https://drive.google.com/drive/folders/10qJLtV7gTasjd9R2eV9ST0A0m5yLNmrF?usp=sharing"
+            href={memoriesMeta.uploadLink || "#"}
             target="_blank"
             className="btn"
           >
-            Upload Photos
+            {memoriesMeta.buttonText || "Upload Photos"}
           </a>
         </div>
       </section>
@@ -230,7 +261,7 @@ export default function Home() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/il_1588xN.6367308167_m45h.webp" alt="Divider" style={{ height: '60px', opacity: 0.8, display: 'block', margin: '0 auto' }} />
           </div>
-          <h2 className="section-title">Guestbook</h2>
+          <h2 className="section-title">{guestbook?.title || "Guestbook"}</h2>
           <Guestbook />
         </div>
       </section>

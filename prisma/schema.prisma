@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -24,4 +24,28 @@ model GuestbookMessage {
   name      String
   message   String
   createdAt DateTime @default(now())
+}
+
+model SiteConfig {
+  id              Int      @id @default(autoincrement())
+  siteTitle       String   @default("Becca & Sameep")
+  primaryColor    String   @default("#889C5B")
+  secondaryColor  String   @default("#D4B996")
+  backgroundColor String   @default("#FDFBF7")
+  foregroundColor String   @default("#1A2B4C")
+  fontHeading     String   @default("Cinzel")
+  fontBody        String   @default("Montserrat")
+  updatedAt       DateTime @updatedAt
+}
+
+model PageSection {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique // e.g., 'hero', 'welcome', 'venue', 'schedule', 'faq', 'rsvp'
+  title     String?
+  subtitle  String?
+  content   String?  // Main text body
+  imageUrl  String?
+  isVisible Boolean  @default(true)
+  order     Int      @default(0)
+  metadata  String?  // JSON string for extra fields
 }
