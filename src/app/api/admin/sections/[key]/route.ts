@@ -3,12 +3,12 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function PUT(request: Request, { params }: { params: { key: string } }) {
+export async function PUT(
+    request: Request,
+    { params }: { params: Promise<{ key: string }> }
+) {
     try {
-        // In Next.js 15+, params might need awaiting if it's dynamic, but usually key param is available here directly in older versions too.
-        // If there's an issue with type, we can cast or await if needed.
-        // However, standard Nextjs route handler:
-        const { key } = params;
+        const { key } = await params;
         const body = await request.json();
 
         // Ensure we don't accidentally update the key itself unless intended (which breaks the where clause if not careful)
