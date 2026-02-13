@@ -120,21 +120,16 @@ export default function Home() {
             <h3 className="card-title text-primary">Saturday, July 4th</h3>
             <div className="space-y-6 mt-6">
               <div>
+                <p className="card-desc mb-2 italic">Please arrive by 11:30 AM sharp</p>
                 <p className="card-date text-[var(--foreground)] mb-2" style={{ fontSize: '1.125rem', fontWeight: 'normal' }}>12:00 PM • The Ceremony</p>
-                <p className="card-desc">Please arrive by 11:30 AM sharp for welcome drinks</p>
-                <p className="card-desc">Join us on the Castle Lawns for Cocktails & Canapés</p>
-                <p className="card-desc">To follow in the castle grounds.</p>
+                <p className="card-desc">followed by cocktails and canapés</p>
               </div>
 
               <div className="w-12 h-[1px] bg-[var(--secondary)] mx-auto opacity-30"></div>
 
               <div>
-                <p className="card-date text-[var(--foreground)] mb-2" style={{ fontSize: '1.125rem', fontWeight: 'normal' }}>4:00 PM • The Reception</p>
-                <p className="card-desc">
-                  Dinner, dancing, and festivities in The Great Hall.
-                  <br />
-                  Carriages at midnight.
-                </p>
+                <p className="card-date text-[var(--foreground)] mb-2" style={{ fontSize: '1.125rem', fontWeight: 'normal' }}>3:00 PM • The Reception</p>
+                <p className="card-desc">Wedding Breakfast, speeches, dancing</p>
               </div>
             </div>
           </div>
@@ -145,8 +140,7 @@ export default function Home() {
             <p className="card-date">Sunday, July 5th • From 12:00 PM</p>
             <p className="picnic-location">Walton Castle Grounds</p>
             <p className="card-desc">
-              Recover with us! We'll provide a delicious picnic lunch.
-              Feel free to bring a bottle if you fancy a hair of the dog.
+              We'd love to invite you to join us the next day for Indi's first birthday.
             </p>
           </div>
         </div>
