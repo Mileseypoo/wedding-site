@@ -16,6 +16,10 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+// Force dynamic rendering to show CMS changes immediately
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function generateMetadata(): Promise<Metadata> {
   const config = await prisma.siteConfig.findFirst();
   return {

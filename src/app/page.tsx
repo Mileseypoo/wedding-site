@@ -5,6 +5,10 @@ import Guestbook from "@/components/Guestbook";
 
 const prisma = new PrismaClient();
 
+// Force dynamic rendering to show CMS changes immediately
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 async function getSections() {
   try {
     return await prisma.pageSection.findMany();
