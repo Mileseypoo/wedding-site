@@ -121,7 +121,7 @@ export default function Home() {
             <p className="card-date">Saturday, July 4th</p>
             <div className="space-y-6 mt-6">
               <div>
-                <p className="font-serif text-xl text-[var(--foreground)]">12:00 PM • The Ceremony</p>
+                <p className="card-date text-[var(--foreground)] mb-2" style={{ fontSize: '1.25rem' }}>12:00 PM • The Ceremony</p>
                 <p className="text-gray-600 italic mb-1">Please arrive by 11:30 AM sharp for welcome drinks</p>
                 <p className="card-desc">Join us on the Castle Lawns.</p>
               </div>
@@ -129,14 +129,14 @@ export default function Home() {
               <div className="w-12 h-[1px] bg-[var(--secondary)] mx-auto opacity-30"></div>
 
               <div>
-                <p className="font-serif text-lg text-[var(--foreground)]">Cocktails & Canapés</p>
+                <p className="card-date text-[var(--foreground)] mb-2" style={{ fontSize: '1.25rem' }}>Cocktails & Canapés</p>
                 <p className="card-desc">To follow in the castle grounds.</p>
               </div>
 
               <div className="w-12 h-[1px] bg-[var(--secondary)] mx-auto opacity-30"></div>
 
               <div>
-                <p className="font-serif text-xl text-[var(--foreground)]">4:00 PM • The Reception</p>
+                <p className="card-date text-[var(--foreground)] mb-2" style={{ fontSize: '1.25rem' }}>4:00 PM • The Reception</p>
                 <p className="card-desc">
                   Dinner, dancing, and festivities in The Great Hall.
                   <br />
