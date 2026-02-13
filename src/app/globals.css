@@ -206,7 +206,10 @@ img {
 
 .hero-title {
   font-size: 3rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
+  /* Increased gap again (back to 0.5rem) */
+  line-height: 1;
+  /* tighter spacing */
   letter-spacing: 0.05em;
   text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   color: white;
@@ -216,13 +219,32 @@ img {
   .hero-title {
     font-size: 5rem;
   }
+
+  .hero-subtitle-main {
+    font-size: 5rem;
+    /* Matches hero-title */
+  }
+}
+
+.hero-subtitle-main {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  /* Matches hero-title */
+  color: white;
+  margin-top: 0;
+  /* Ensure no top gap */
+  margin-bottom: 2rem;
+  line-height: 1;
+  /* tighter spacing */
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .hero-date {
   display: flex;
   align-items: center;
   gap: 15px;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
+  /* Increased from 1.1rem */
   font-family: var(--font-body);
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -401,10 +423,12 @@ img {
 }
 
 .section-separator {
-  height: 30px;
+  height: 80px;
+  /* Increased from 30px */
   margin: 0 auto 1.5rem;
   display: block;
-  opacity: 0.6;
+  opacity: 1.0;
+  /* Increased from 0.6 */
 }
 
 .faq-grid {

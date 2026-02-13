@@ -34,14 +34,14 @@ export default function Home() {
         </div>
 
         <div className="hero-content">
-          <p className="hero-subtitle">We're Getting Married</p>
           <h1 className="hero-title">
             Becca & Sameep
           </h1>
+          <p className="hero-subtitle-main">are getting married!</p>
           <div className="hero-date">
             <span>July 4th 2026</span>
             <span className="dot-separator"></span>
-            <span>Somerset, UK</span>
+            <span>Walton Castle, Clevedon</span>
           </div>
         </div>
       </header>
@@ -60,14 +60,14 @@ export default function Home() {
             <img src="/il_1588xN.6367308285_hs72.webp" alt="Floral Element" />
           </div>
 
-          <h2 className="section-title">Our Story</h2>
+          <h2 className="section-title">Welcome to our wedding website!</h2>
           <p className="section-text">
-            Welcome to our wedding website! We can't wait to celebrate our special day with you.
-            We've created this website as a convenient and interactive way to share all the important details with you in the lead up to our wedding.
+            We can't wait to celebrate our special day with you. We've created this website as a convenient and interactive way to share all the important details with you in the lead up to our wedding.
           </p>
-          <p className="quote-text">
-            "Love is not just looking at each other, it's looking in the same direction."
-          </p>
+          <div className="text-center mt-12">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/niagra.png" alt="Becca and Sameep at Niagara" style={{ maxWidth: '100%', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
+          </div>
         </div>
       </section>
 
@@ -76,8 +76,9 @@ export default function Home() {
         <div className="container">
           <div className="text-center mb-12">
             <div className="floral-divider">
+              {/* Large Floral for Venue */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/il_1588xN.6367308285_hs72.webp" alt="Floral Element" />
+              <img src="/il_1588xN.6319250904_7c06.webp" alt="Floral Element" style={{ height: '20vh', maxHeight: '200px', width: 'auto', margin: '0 auto 20px', display: 'block' }} />
             </div>
             <h2 className="section-title">The Venue</h2>
           </div>
@@ -105,7 +106,14 @@ export default function Home() {
       {/* Schedule Section */}
       <section id="schedule" className="section schedule-section">
         <div className="container">
-          <h2 className="section-title text-center">The Weekend</h2>
+          <div className="text-center mb-12">
+            <div className="floral-divider">
+              {/* large floral for Weekend */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/il_1588xN.6367308167_m45h.webp" alt="Divider" style={{ height: 'auto', width: '100%', maxWidth: '500px', margin: '0 auto 20px', display: 'block' }} />
+            </div>
+            <h2 className="section-title">The Weekend</h2>
+          </div>
 
           <div className="schedule-grid">
             {/* Ceremony Card */}
@@ -145,9 +153,11 @@ export default function Home() {
       {/* FAQ Section */}
       <section id="faq" className="section faq-section">
         <div className="container faq-container">
-          <div className="text-center mb-16">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/il_1588xN.6367308167_m45h.webp" alt="Divider" className="section-separator" />
+          <div className="text-center mb-12">
+            <div className="floral-divider">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/il_1588xN.6319250896_pu5c.webp" alt="Floral Element" style={{ height: '90px', opacity: 0.9 }} />
+            </div>
             <h2 className="section-title">Q & A</h2>
           </div>
 
@@ -186,6 +196,10 @@ export default function Home() {
       {/* RSVP Section */}
       <section id="rsvp" className="section rsvp-section">
         <div className="container text-center">
+          <div className="section-separator">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/il_1588xN.6367308167_m45h.webp" alt="Divider" style={{ height: '60px', opacity: 0.8, display: 'block', margin: '0 auto' }} />
+          </div>
           <h2 className="section-title">Will You Be Joining Us?</h2>
           <p className="rsvp-subtitle">Kindly Respond By September 1st, 2026</p>
           <RSVPForm />
@@ -195,6 +209,10 @@ export default function Home() {
       {/* Share Memories Section */}
       <section id="memories" className="section memories-section">
         <div className="container text-center max-w-2xl">
+          <div className="floral-divider">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/il_1588xN.6367308285_hs72.webp" alt="Floral Element" />
+          </div>
           <h2 className="section-title">Share Your Memories</h2>
           <p className="section-text">
             Help us capture the story of our lives together. If you have photos of us, please upload them!
@@ -212,6 +230,10 @@ export default function Home() {
       {/* Guestbook Section */}
       <section id="guestbook" className="section guestbook-section">
         <div className="container text-center">
+          <div className="section-separator">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/il_1588xN.6367308167_m45h.webp" alt="Divider" style={{ height: '60px', opacity: 0.8, display: 'block', margin: '0 auto' }} />
+          </div>
           <h2 className="section-title">Guestbook</h2>
           <Guestbook />
         </div>
