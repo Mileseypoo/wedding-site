@@ -115,34 +115,29 @@ export default function Home() {
             <h2 className="section-title">Wedding Timings</h2>
           </div>
 
-          <div className="schedule-timeline-card max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-sm border border-[#e5e7eb] mb-12 relative">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--background)] px-4">
-              <span className="text-xl font-serif text-[var(--primary)]">Saturday, July 4th</span>
-            </div>
-
-            <div className="space-y-8 text-center">
+          {/* Wedding Timings Card */}
+          <div className="picnic-card mb-12">
+            <h3 className="card-title text-primary">The Wedding Day</h3>
+            <p className="card-date">Saturday, July 4th</p>
+            <div className="space-y-6 mt-6">
               <div>
-                <h3 className="text-2xl font-serif text-[var(--primary)] mb-2">12:00 PM • The Ceremony</h3>
-                <p className="text-gray-600 italic mb-2">Please arrive by 11:30 AM sharp for welcome drinks</p>
-                <p className="section-text">
-                  Join us on the Castle Lawns for our wedding ceremony.
-                </p>
+                <p className="font-serif text-xl text-[var(--foreground)]">12:00 PM • The Ceremony</p>
+                <p className="text-gray-600 italic mb-1">Please arrive by 11:30 AM sharp for welcome drinks</p>
+                <p className="card-desc">Join us on the Castle Lawns.</p>
               </div>
 
-              <div className="w-16 h-[1px] bg-[var(--secondary)] mx-auto opacity-50"></div>
+              <div className="w-12 h-[1px] bg-[var(--secondary)] mx-auto opacity-30"></div>
 
               <div>
-                <h3 className="text-xl font-serif text-[var(--foreground)] mb-2">Cocktails & Canapés</h3>
-                <p className="section-text">
-                  To follow in the castle grounds.
-                </p>
+                <p className="font-serif text-lg text-[var(--foreground)]">Cocktails & Canapés</p>
+                <p className="card-desc">To follow in the castle grounds.</p>
               </div>
 
-              <div className="w-16 h-[1px] bg-[var(--secondary)] mx-auto opacity-50"></div>
+              <div className="w-12 h-[1px] bg-[var(--secondary)] mx-auto opacity-30"></div>
 
               <div>
-                <h3 className="text-2xl font-serif text-[var(--primary)] mb-2">4:00 PM • The Reception</h3>
-                <p className="section-text">
+                <p className="font-serif text-xl text-[var(--foreground)]">4:00 PM • The Reception</p>
+                <p className="card-desc">
                   Dinner, dancing, and festivities in The Great Hall.
                   <br />
                   Carriages at midnight.
