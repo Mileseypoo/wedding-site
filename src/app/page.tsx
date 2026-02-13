@@ -123,7 +123,7 @@ export default async function Home() {
           <p className="section-text">
             {welcome?.content || "We can't wait to celebrate our special day with you."}
           </p>
-          <div className="text-center mt-12">
+          <div className="text-center" style={{ marginTop: '1.5rem' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={welcome?.imageUrl || "/niagra.png"} alt="Welcome" style={{ maxWidth: '100%', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
           </div>
