@@ -73,22 +73,31 @@ export default function Home() {
 
       {/* Venue Section */}
       <section id="venue" className="section venue-section">
-        <div className="container venue-container">
-          <div className="venue-image">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/walton_castle.jpg" alt="Walton Castle" />
-          </div>
-          <div className="venue-details">
+        <div className="container">
+          <div className="text-center mb-12">
+            <div className="floral-divider">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/il_1588xN.6367308285_hs72.webp" alt="Floral Element" />
+            </div>
             <h2 className="section-title">The Venue</h2>
-            <h3 className="venue-name">Walton Castle</h3>
-            <p className="venue-location">Clevedon, North Somerset</p>
-            <p className="section-text text-left">
-              A stunning 17th-century hill-top castle with panoramic views spanning five counties.
-              We have exclusive use of the entire estate for a celebration to remember.
-            </p>
-            <a href="https://www.waltoncastle.com/properties/walton-castle" target="_blank" className="btn btn-outline">
-              Explore the Castle
-            </a>
+          </div>
+
+          <div className="venue-container">
+            <div className="venue-image">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/walton_castle.jpg" alt="Walton Castle" />
+            </div>
+            <div className="venue-details text-center md:text-left">
+              <h3 className="venue-name">Walton Castle</h3>
+              <p className="venue-location">Clevedon, North Somerset</p>
+              <p className="section-text">
+                A stunning 17th-century hill-top castle with panoramic views spanning five counties.
+                We have exclusive use of the entire estate for a celebration to remember.
+              </p>
+              <a href="https://www.waltoncastle.com/properties/walton-castle" target="_blank" className="btn btn-outline">
+                Explore the Castle
+              </a>
+            </div>
           </div>
         </div>
       </section>
