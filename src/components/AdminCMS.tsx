@@ -28,6 +28,64 @@ type SiteConfig = {
     fontBody: string;
 };
 
+const isJsonContent = (content: string | null) => {
+    if (!content) return false;
+    try {
+        const trimmed = content.trim();
+        if (!trimmed.startsWith('{') && !trimmed.startsWith('[')) return false;
+        const parsed = JSON.parse(content);
+        return typeof parsed === 'object' && parsed !== null;
+    } catch {
+        return false;
+    }
+};
+
+const updateJsonContent = (originalContent: string, path: (string | number)[], newValue: any) => {
+    const data = JSON.parse(originalContent);
+    let current = data;
+    for (let i = 0; i < path.length - 1; i++) {
+        current = current[path[i]];
+    }
+    current[path[path.length - 1]] = newValue;
+    return JSON.stringify(data, null, 2);
+};
+
+const JsonFieldEditor = ({ data, path = [], onChange }: { data: any, path: (string | number)[], onChange: (path: (string | number)[], val: any) => void }) => {
+    if (Array.isArray(data)) {
+        return (
+            <div style={{ marginLeft: '10px', borderLeft: '2px solid #eee', paddingLeft: '10px' }}>
+                {data.map((item, idx) => (
+                    <div key={idx} style={{ marginBottom: '15px', background: '#fff', padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}>
+                        <strong style={{ display: 'block', marginBottom: '5px', color: '#666' }}>Item {idx + 1}</strong>
+                        <JsonFieldEditor data={item} path={[...path, idx]} onChange={onChange} />
+                    </div>
+                ))}
+            </div>
+        );
+    } else if (typeof data === 'object' && data !== null) {
+        return (
+            <div style={{ marginLeft: '10px' }}>
+                {Object.keys(data).map((key) => (
+                    <div key={key} style={{ marginBottom: '10px' }}>
+                        <label style={{ fontSize: '0.9em', fontWeight: 'bold', textTransform: 'capitalize', color: '#444' }}>
+                            {key.replace(/([A-Z])/g, ' $1').trim()}
+                        </label>
+                        <JsonFieldEditor data={data[key]} path={[...path, key]} onChange={onChange} />
+                    </div>
+                ))}
+            </div>
+        );
+    } else {
+        return (
+            <input
+                style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
+                value={data}
+                onChange={(e) => onChange(path, e.target.value)}
+            />
+        );
+    }
+};
+
 export default function AdminCMS() {
     const [activeTab, setActiveTab] = useState<'content' | 'theme'>('content');
     const [sections, setSections] = useState<Section[]>([]);
@@ -96,70 +154,6 @@ export default function AdminCMS() {
     };
 
     if (loading) return <div>Loading CMS...</div>;
-
-    const isJsonContent = (content: string | null) => {
-        if (!content) return false;
-        try {
-            // Heuristic: start with { or [
-            const trimmed = content.trim();
-            if (!trimmed.startsWith('{') && !trimmed.startsWith('[')) return false;
-            const parsed = JSON.parse(content);
-            return typeof parsed === 'object' && parsed !== null;
-        } catch {
-            return false;
-        }
-    };
-
-    const updateJsonContent = (originalContent: string, path: (string | number)[], newValue: any) => {
-        const data = JSON.parse(originalContent);
-        let current = data;
-        for (let i = 0; i < path.length - 1; i++) {
-            current = current[path[i]];
-        }
-        current[path[path.length - 1]] = newValue;
-        return JSON.stringify(data, null, 2);
-    };
-
-    /**
-     * Recursive component to render form fields for JSON data
-     */
-    const JsonFieldEditor = ({ data, path = [], onChange }: { data: any, path: (string | number)[], onChange: (path: (string | number)[], val: any) => void }) => {
-        if (Array.isArray(data)) {
-            return (
-                <div style={{ marginLeft: '10px', borderLeft: '2px solid #eee', paddingLeft: '10px' }}>
-                    {data.map((item, idx) => (
-                        <div key={idx} style={{ marginBottom: '15px', background: '#fff', padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}>
-                            <strong style={{ display: 'block', marginBottom: '5px', color: '#666' }}>Item {idx + 1}</strong>
-                            <JsonFieldEditor data={item} path={[...path, idx]} onChange={onChange} />
-                        </div>
-                    ))}
-                    {/* Adding items to arrays is complex without schema, leaving out for now or assume fixed structure */}
-                </div>
-            );
-        } else if (typeof data === 'object' && data !== null) {
-            return (
-                <div style={{ marginLeft: '10px' }}>
-                    {Object.keys(data).map((key) => (
-                        <div key={key} style={{ marginBottom: '10px' }}>
-                            <label style={{ fontSize: '0.9em', fontWeight: 'bold', textTransform: 'capitalize', color: '#444' }}>
-                                {key.replace(/([A-Z])/g, ' $1').trim()}
-                            </label>
-                            <JsonFieldEditor data={data[key]} path={[...path, key]} onChange={onChange} />
-                        </div>
-                    ))}
-                </div>
-            );
-        } else {
-            // Primitive leaf (String, Number, Boolean)
-            return (
-                <input
-                    style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
-                    value={data}
-                    onChange={(e) => onChange(path, e.target.value)}
-                />
-            );
-        }
-    };
 
     return (
         <div className="cms-container" style={{ marginTop: '40px', borderTop: '2px solid #eee', paddingTop: '20px' }}>
