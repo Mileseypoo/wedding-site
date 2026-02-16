@@ -56,10 +56,52 @@ const JsonFieldEditor = ({ data, path = [], onChange }: { data: any, path: (stri
             <div style={{ marginLeft: '10px', borderLeft: '2px solid #eee', paddingLeft: '10px' }}>
                 {data.map((item, idx) => (
                     <div key={idx} style={{ marginBottom: '15px', background: '#fff', padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}>
-                        <strong style={{ display: 'block', marginBottom: '5px', color: '#666' }}>Item {idx + 1}</strong>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px' }}>
+                            <strong style={{ display: 'block', color: '#666' }}>Item {idx + 1}</strong>
+                            <button
+                                onClick={() => {
+                                    const newData = [...data];
+                                    newData.splice(idx, 1);
+                                    onChange(path, newData);
+                                }}
+                                style={{ background: '#ff4d4f', color: 'white', border: 'none', borderRadius: '4px', padding: '2px 8px', cursor: 'pointer', fontSize: '0.8rem' }}
+                            >
+                                Remove
+                            </button>
+                        </div>
                         <JsonFieldEditor data={item} path={[...path, idx]} onChange={onChange} />
                     </div>
                 ))}
+                <button
+                    onClick={() => {
+                        // Create a new item based on structure of existing items or default
+                        let newItem: any = "";
+                        if (data.length > 0) {
+                            // Deep clone structure of first item but reset values
+                            const cloneStructure = (obj: any): any => {
+                                if (typeof obj === 'object' && obj !== null) {
+                                    if (Array.isArray(obj)) return []; // Empty array for new item's arrays
+                                    const newObj: any = {};
+                                    for (const key in obj) {
+                                        newObj[key] = cloneStructure(obj[key]);
+                                    }
+                                    return newObj;
+                                }
+                                return ""; // Default empty string for primitives
+                            };
+                            newItem = cloneStructure(data[0]);
+                        } else {
+                            // Fallback for empty array - try to guess or just add empty string (user can't really edit structure of empty object easily here without schema)
+                            // For FAQ specifically, we know it is { q: "", a: "" }
+                            newItem = { q: "", a: "" };
+                        }
+
+                        onChange(path, [...data, newItem]);
+                    }}
+                    style={{ background: '#4CAF50', color: 'white', border: 'none', borderRadius: '4px', padding: '5px 10px', cursor: 'pointer', marginTop: '5px' }}
+                >
+                    + Add Item
+                </button>
             </div>
         );
     } else if (typeof data === 'object' && data !== null) {
