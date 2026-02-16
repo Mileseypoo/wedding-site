@@ -41,6 +41,10 @@ const isJsonContent = (content: string | null) => {
 };
 
 const updateJsonContent = (originalContent: string, path: (string | number)[], newValue: any) => {
+    // If updating the root, just return the new value stringified
+    if (path.length === 0) {
+        return JSON.stringify(newValue, null, 2);
+    }
     const data = JSON.parse(originalContent);
     let current = data;
     for (let i = 0; i < path.length - 1; i++) {
