@@ -130,14 +130,7 @@ async function main() {
         },
     })
 
-    // Guestbook Section
-    await prisma.pageSection.create({
-        data: {
-            key: 'guestbook',
-            title: 'Guestbook',
-            order: 8,
-        },
-    })
+
 
     console.log('Database seeded successfully!')
 }

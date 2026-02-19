@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import Link from "next/link";
 import RSVPForm from "@/components/RSVPForm";
-import Guestbook from "@/components/Guestbook";
+
 
 const prisma = new PrismaClient();
 
@@ -61,8 +61,7 @@ export default async function Home() {
   const memories = getSec('memories');
   const memoriesMeta = parseMeta(memories);
 
-  // Guestbook
-  const guestbook = getSec('guestbook');
+
 
   return (
     <div className="main-wrapper">
@@ -120,9 +119,7 @@ export default async function Home() {
           </div>
 
           <h2 className="section-title">{welcome?.title || "Welcome to our wedding website!"}</h2>
-          <p className="section-text">
-            {welcome?.content || "We can't wait to celebrate our special day with you."}
-          </p>
+          <div className="section-text" dangerouslySetInnerHTML={{ __html: welcome?.content || "We can't wait to celebrate our special day with you." }} />
           <div className="text-center" style={{ marginTop: '1.5rem' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={welcome?.imageUrl || "/niagra.png"} alt="Welcome" style={{ maxWidth: '100%', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
@@ -149,9 +146,7 @@ export default async function Home() {
             <div className="venue-details text-center md:text-left">
               <h3 className="venue-name">{venue?.subtitle || "Walton Castle"}</h3>
               <p className="venue-location">{venueMeta.address || "Clevedon, North Somerset"}</p>
-              <p className="section-text">
-                {venue?.content || "A stunning castle..."}
-              </p>
+              <div className="section-text" dangerouslySetInnerHTML={{ __html: venue?.content || "A stunning castle..." }} />
               <a href={venueMeta.buttonLink || "#"} className="btn btn-outline">
                 {venueMeta.buttonText || "Explore the Castle"}
               </a>
@@ -195,9 +190,7 @@ export default async function Home() {
             <h3 className="card-title text-primary">{picnic?.title || "Sunday Birthday Picnic"}</h3>
             <p className="card-date text-[var(--foreground)] mb-2" style={{ fontSize: '1.25rem' }}>{picnic?.subtitle || "Sunday, July 5th • From 12:00 PM"}</p>
             <p className="picnic-location">{picnicMeta.location || "Walton Castle Grounds"}</p>
-            <p className="card-desc">
-              {picnic?.content || "We'd love to invite you to join us..."}
-            </p>
+            <div className="card-desc" dangerouslySetInnerHTML={{ __html: picnic?.content || "We'd love to invite you to join us..." }} />
           </div>
         </div>
       </section>
@@ -245,9 +238,7 @@ export default async function Home() {
             <img src="/il_1588xN.6367308285_hs72.webp" alt="Floral Element" />
           </div>
           <h2 className="section-title">{memories?.title || "Share Your Memories"}</h2>
-          <p className="section-text">
-            {memories?.content || "Help us capture the story..."}
-          </p>
+          <div className="section-text" dangerouslySetInnerHTML={{ __html: memories?.content || "Help us capture the story..." }} />
           <a
             href={memoriesMeta.uploadLink || "#"}
             target="_blank"
@@ -258,17 +249,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Guestbook Section */}
-      <section id="guestbook" className="section guestbook-section">
-        <div className="container text-center">
-          <div className="section-separator">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/il_1588xN.6367308167_m45h.webp" alt="Divider" style={{ height: '60px', opacity: 0.8, display: 'block', margin: '0 auto' }} />
-          </div>
-          <h2 className="section-title">{guestbook?.title || "Guestbook"}</h2>
-          <Guestbook />
-        </div>
-      </section>
+
 
       {/* Footer */}
       <footer className="footer">

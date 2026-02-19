@@ -84,11 +84,6 @@ const defaultSections = [
         }),
         order: 7,
     },
-    {
-        key: 'guestbook',
-        title: 'Guestbook',
-        order: 8,
-    },
 ];
 
 export async function GET() {
