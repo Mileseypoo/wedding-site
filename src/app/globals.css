@@ -344,6 +344,13 @@ img {
   color: var(--secondary);
   font-style: italic;
   margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.venue-details .section-text {
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  text-align: center;
 }
 
 /* Schedule */
