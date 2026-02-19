@@ -29,7 +29,7 @@ const defaultSections = [
         content: "A stunning 17th-century hill-top castle with panoramic views spanning five counties. We have exclusive use of the entire estate for a celebration to remember.",
         imageUrl: '/walton_castle.jpg',
         metadata: JSON.stringify({
-            address: 'Clevedon, North Somerset',
+            address: 'Walton Castle, Castle Road, Clevedon, BS21 7AA',
             buttonLink: 'https://www.waltoncastle.com/properties/walton-castle',
             buttonText: 'Explore the Castle',
         }),

@@ -143,9 +143,9 @@ export default async function Home() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={venue?.imageUrl || "/walton_castle.jpg"} alt={venue?.subtitle || "Walton Castle"} />
             </div>
-            <div className="venue-details text-center md:text-left">
+            <div className="venue-details text-center">
               <h3 className="venue-name">{venue?.subtitle || "Walton Castle"}</h3>
-              <p className="venue-location">{venueMeta.address || "Clevedon, North Somerset"}</p>
+              <p className="venue-location">{venueMeta.address || "Walton Castle, Castle Road, Clevedon, BS21 7AA"}</p>
               <div className="section-text" dangerouslySetInnerHTML={{ __html: venue?.content || "A stunning castle..." }} />
               <a href={venueMeta.buttonLink || "#"} className="btn btn-outline">
                 {venueMeta.buttonText || "Explore the Castle"}
