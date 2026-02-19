@@ -281,6 +281,20 @@ export default function AdminCMS() {
                                         onChange={e => setEditingSection({ ...editingSection, imageUrl: e.target.value })}
                                     />
                                 </label>
+
+                                {editingSection.metadata && (
+                                    <div style={{ padding: '15px', background: '#f0f4f8', borderRadius: '4px', border: '1px solid #bcccdc', marginTop: '10px' }}>
+                                        <div style={{ marginBottom: '10px', fontWeight: 'bold', color: '#486581' }}>Section Settings (Address, Links, etc.)</div>
+                                        <JsonFieldEditor
+                                            data={JSON.parse(editingSection.metadata)}
+                                            path={[]}
+                                            onChange={(path, val) => {
+                                                const newMeta = updateJsonContent(editingSection.metadata!, path, val);
+                                                setEditingSection({ ...editingSection, metadata: newMeta });
+                                            }}
+                                        />
+                                    </div>
+                                )}
                                 <div style={{ display: 'flex', gap: '10px' }}>
                                     <button onClick={() => handleSaveSection(editingSection)} style={{ background: '#43B097', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '4px' }}>Save Changes</button>
                                     <button onClick={() => setEditingSection(null)} style={{ background: '#ccc', padding: '10px 20px', border: 'none', borderRadius: '4px' }}>Cancel</button>
