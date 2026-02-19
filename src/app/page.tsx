@@ -138,15 +138,26 @@ export default async function Home() {
             <h2 className="section-title">{venue?.title || "The Venue"}</h2>
           </div>
 
-          <div className="venue-container">
-            <div className="venue-image">
+          <div className="venue-content-centered text-center">
+            <div className="venue-image-main" style={{ marginBottom: '2.5rem' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={venue?.imageUrl || "/walton_castle.jpg"} alt={venue?.subtitle || "Walton Castle"} />
+              <img
+                src={venue?.imageUrl || "/walton_castle.jpg"}
+                alt={venue?.subtitle || "Walton Castle"}
+                style={{ maxWidth: '800px', width: '100%', borderRadius: '8px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
+              />
             </div>
-            <div className="venue-details text-center">
-              <h3 className="venue-name">{venue?.subtitle || "Walton Castle"}</h3>
-              <p className="venue-location">{venueMeta.address || "Walton Castle, Castle Road, Clevedon, BS21 7AA"}</p>
-              <div className="section-text" dangerouslySetInnerHTML={{ __html: venue?.content || "A stunning castle..." }} />
+
+            <div className="venue-details-text">
+              <h3 className="venue-name" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>{venue?.subtitle || "Walton Castle"}</h3>
+              <p className="venue-location" style={{ fontStyle: 'italic', color: 'var(--secondary)', marginBottom: '1.5rem', fontSize: '1.1rem' }}>
+                {venueMeta.address || "Walton Castle, Castle Road, Clevedon, BS21 7AA"}
+              </p>
+              <div
+                className="section-text"
+                style={{ maxWidth: '750px', margin: '0 auto 2rem' }}
+                dangerouslySetInnerHTML={{ __html: venue?.content || "A stunning 17th-century hill-top castle..." }}
+              />
               <a href={venueMeta.buttonLink || "#"} className="btn btn-outline">
                 {venueMeta.buttonText || "Explore the Castle"}
               </a>
