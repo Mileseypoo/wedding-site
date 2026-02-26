@@ -31,6 +31,8 @@ export default async function Home() {
     }
   };
 
+  const cleanHTML = (html: any) => typeof html === 'string' ? html.replace(/&nbsp;/g, ' ') : html;
+
   // Hero
   const hero = getSec('hero');
   const heroMeta = parseMeta(hero);
@@ -119,7 +121,7 @@ export default async function Home() {
           </div>
 
           <h2 className="section-title">{welcome?.title || "Welcome to our wedding website!"}</h2>
-          <div className="section-text" dangerouslySetInnerHTML={{ __html: welcome?.content || "We can't wait to celebrate our special day with you." }} />
+          <div className="section-text" dangerouslySetInnerHTML={{ __html: cleanHTML(welcome?.content) || "We can't wait to celebrate our special day with you." }} />
           <div className="text-center" style={{ marginTop: '1.5rem' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={welcome?.imageUrl || "/niagra.png"} alt="Welcome" style={{ maxWidth: '100%', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
@@ -156,7 +158,7 @@ export default async function Home() {
               <div
                 className="section-text"
                 style={{ maxWidth: '750px', margin: '0 auto 2rem' }}
-                dangerouslySetInnerHTML={{ __html: venue?.content || "A stunning 17th-century hill-top castle..." }}
+                dangerouslySetInnerHTML={{ __html: cleanHTML(venue?.content) || "A stunning 17th-century hill-top castle..." }}
               />
               <a href={venueMeta.buttonLink || "#"} className="btn btn-outline">
                 {venueMeta.buttonText || "Explore the Castle"}
@@ -201,7 +203,7 @@ export default async function Home() {
             <h3 className="card-title text-primary">{picnic?.title || "Sunday Birthday Picnic"}</h3>
             <p className="card-date text-[var(--foreground)] mb-2" style={{ fontSize: '1.25rem' }}>{picnic?.subtitle || "Sunday, July 5th • From 12:00 PM"}</p>
             <p className="picnic-location">{picnicMeta.location || "Walton Castle Grounds"}</p>
-            <div className="card-desc" dangerouslySetInnerHTML={{ __html: picnic?.content || "We'd love to invite you to join us..." }} />
+            <div className="card-desc" dangerouslySetInnerHTML={{ __html: cleanHTML(picnic?.content) || "We'd love to invite you to join us..." }} />
           </div>
         </div>
       </section>
@@ -249,7 +251,7 @@ export default async function Home() {
             <img src="/il_1588xN.6367308285_hs72.webp" alt="Floral Element" />
           </div>
           <h2 className="section-title">{memories?.title || "Share Your Memories"}</h2>
-          <div className="section-text" dangerouslySetInnerHTML={{ __html: memories?.content || "Help us capture the story..." }} />
+          <div className="section-text" dangerouslySetInnerHTML={{ __html: cleanHTML(memories?.content) || "Help us capture the story..." }} />
           <a
             href={memoriesMeta.uploadLink || "#"}
             target="_blank"
