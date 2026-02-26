@@ -79,7 +79,7 @@ const defaultSections = [
         title: 'Share Your Memories',
         content: 'Help us capture the story of our lives together. If you have photos of us, please upload them!',
         metadata: JSON.stringify({
-            uploadLink: 'https://drive.google.com/drive/folders/10qJLtV7gTasjd9R2eV9ST0A0m5yLNmrF?usp=sharing',
+            uploadLink: 'https://drive.google.com/drive/folders/1nJtIjOjFztQn0oKQ8xuID8v50WjCxp0M?usp=sharing',
             buttonText: 'Upload Photos',
         }),
         order: 7,
