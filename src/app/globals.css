@@ -541,7 +541,5 @@ img {
   }
   .section-text {
     padding: 0 15px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
   }
 }
