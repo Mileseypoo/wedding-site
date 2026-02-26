@@ -529,3 +529,19 @@ img {
   background-color: var(--foreground);
   color: white;
 }
+
+@media (max-width: 767px) {
+  .hero-date {
+    flex-direction: column-reverse;
+    gap: 8px;
+    font-size: 1.2rem;
+  }
+  .hero-date .dot-separator {
+    display: none;
+  }
+  .section-text {
+    padding: 0 15px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
