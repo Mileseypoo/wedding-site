@@ -25,6 +25,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: config?.siteTitle || "Becca & Sameep | Wedding",
     description: "Join us in celebrating our special day.",
+    icons: {
+      icon: '/favicon.png',
+    },
   };
 }
 
